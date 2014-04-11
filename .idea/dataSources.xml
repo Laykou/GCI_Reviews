@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="4051976965">
+    <data-source source="LOCAL" name="Rails GCI_Reviews: development" uuid="5c548a9e-4499-4e47-9976-af3ef9a15326">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:GCIReviews_development</jdbc-url>
+      <user-name>GCIReviews</user-name>
+      <user-password>dfd8dfcfdfdcdfc3dfcfdfdddfd9dfd8dfcfdfdcdfc3dfcfdfdddfd9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails GCI_Reviews: test" uuid="b2008602-2375-4746-a2df-83ae82b3cf73">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:GCIReviews_test</jdbc-url>
+      <user-name>GCIReviews</user-name>
+      <user-password>dfd8dfcfdfdcdfc3dfcfdfdddfd9dfd8dfcfdfdcdfc3dfcfdfdddfd9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails GCI_Reviews: production" uuid="bd51074e-9b10-4660-afe1-cd35f4d0edaa">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:GCIReviews_production</jdbc-url>
+      <user-name>GCIReviews</user-name>
+      <user-password>dfd8dfcfdfdcdfc3dfcfdfdddfd9dfd8dfcfdfdcdfc3dfcfdfdddfd9</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
