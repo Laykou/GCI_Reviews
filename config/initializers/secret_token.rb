@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-GCIReviews::Application.config.secret_key_base = '224f2d8ba2a5fdd46c40a4dd871c8ff977778e37644e80ceb9591c1c7e770f82289c2b2bfe55114a3a6d613043dd4c838a8d564d7b356dc39cac50f72c69f552'
+
+require 'securerandom'
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+GCIReviews::Application.config.secret_key_base = secure_token
