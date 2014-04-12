@@ -14,3 +14,12 @@
 body {
     padding-top: 60px;
 }
+
+div.home-jumbotron {
+        background-color: #ffffff;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    border: 1px solid #c3c3c3;
+    padding-bottom: 240px;
+    padding-top: 10px;
+}
