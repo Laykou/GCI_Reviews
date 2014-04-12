@@ -47,7 +47,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => "bootstrap3"
 
 group :development, :test do
   gem 'rspec-rails'
@@ -67,3 +67,5 @@ end
 group :production do
   gem 'rails_12factor'
 end
+
+gem "rails_admin"
