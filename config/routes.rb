@@ -2,6 +2,10 @@ GCIReviews::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  namespace :account do
+    resources :gci_reviews_apis
+  end
+
   root 'static_pages#index'
 
   get 'about' => 'static_pages#about'
@@ -14,6 +18,8 @@ GCIReviews::Application.routes.draw do
   post 'sign-up' => 'static_pages#sign_up_create', as: 'sign_up_create'
 
   get 'account' => 'session#index'
+
+  get 'reviews/:api' => 'gci_reviews#load', :defaults => { :format => :js }, as: 'gci_reviews'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

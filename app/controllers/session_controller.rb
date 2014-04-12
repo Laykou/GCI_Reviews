@@ -2,7 +2,7 @@ class SessionController < ApplicationController
   before_action :signed_in_user, only: [:index]
 
   def index
-
+    @clinic = current_user.clinic
   end
 
   def new

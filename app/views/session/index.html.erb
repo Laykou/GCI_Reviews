@@ -1,2 +1,20 @@
 <% provide :title, 'My account' %>
 <h1>Welcome <b><%= current_user.full_name %></b></h1>
+
+<% if @clinic != nil %>
+    <p class="lead">You have assigned clinic: <b><%= @clinic.name %></b>.</p>
+
+    <% if @clinic.gci_reviews_apis.any? %>
+        <p>Congratulation. You have <b><%= pluralize @clinic.gci_reviews_apis.count, 'gci reviews api' %></b> assigned
+          to your account. <%= link_to "Go to the Reviews API section", account_gci_reviews_apis_path %> to manage all
+          reviews. </p>
+    <% else %>
+        <p>You don't have any
+          <b>GCI Reviews API created</b>. <%= link_to "Create GCI Reviews API", new_account_gci_reviews_api_path %> to
+          easily add
+          reviews to your website.</p>
+    <% end %>
+<% else %>
+    <p class="lead">There is no clinic assigned to you. <%= link_to "Contact us", contact_path %> if you own any clinic
+      and we will assign it to you.</p>
+<% end %>

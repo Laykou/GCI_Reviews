@@ -1,0 +1,33 @@
+<h1>Listing your GCI Reviews boxes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Clinic</th>
+      <th>Web page</th>
+      <th>Api Code</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @account_gci_reviews_apis.each do |account_gci_reviews_api| %>
+        <tr>
+          <td><%= account_gci_reviews_api.id %></td>
+          <td><%= account_gci_reviews_api.clinic.name %></td>
+          <td><%= account_gci_reviews_api.web_page %></td>
+          <td><%= account_gci_reviews_api.api_code[0..10] %>...</td>
+          <td><%= account_gci_reviews_api.gci_reviews_api_type.label %></td>
+          <td><%= link_to 'Show', account_gci_reviews_api_path(account_gci_reviews_api), class: 'btn btn-primary' %>
+            <%= link_to 'Edit', edit_account_gci_reviews_api_path(account_gci_reviews_api), class: 'btn btn-default' %>
+            <%= link_to 'Destroy', account_gci_reviews_api_path(account_gci_reviews_api), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Create new GCI box', new_account_gci_reviews_api_path, class: 'btn btn-primary' %>

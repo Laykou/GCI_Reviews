@@ -1,0 +1,13 @@
+<%= bootstrap_form_for @account_gci_reviews_api, url: account_gci_reviews_api_path, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4' do |f| %>
+    <%= f.collection_select :clinic_id, [current_user.clinic], :id, :name, :readonly => true %>
+    <%= f.text_field :web_page %>
+    <%= f.collection_select :gci_reviews_api_type_id, GciReviewsApiType.all, :id, :label, selected: @account_gci_reviews_api.gci_reviews_api_type.id, label: "Type" %>
+    <%= f.collection_select :gci_reviews_api_color_scheme_id, GciReviewsApiColorScheme.all, :id, :label, label: "Color scheme" %>
+    <%= f.number_field :reviews_per_page %>
+    <%= f.form_group do %>
+        <%= f.check_box :must_approve %>
+    <% end %>
+    <%= f.form_group do %>
+        <%= f.submit submit_label %>
+    <% end %>
+<% end %>
