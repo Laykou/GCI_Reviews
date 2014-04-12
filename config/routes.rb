@@ -12,6 +12,9 @@ GCIReviews::Application.routes.draw do
 
   get 'sign-in' => 'static_pages#sign_in', as: 'sign_in'
   get 'sign-up' => 'static_pages#sign_up', as: 'sign_up'
+  post 'sign-up' => 'static_pages#sign_up_create', as: 'sign_up_create'
+
+  get 'account' => 'account#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

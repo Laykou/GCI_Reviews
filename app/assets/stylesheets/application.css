@@ -8,6 +8,7 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require rails_bootstrap_forms
  *= require_self
  *= require_tree .
  */
@@ -16,7 +17,7 @@ body {
 }
 
 div.home-jumbotron {
-        background-color: #ffffff;
+    background-color: #ffffff;
     background-position: bottom center;
     background-repeat: no-repeat;
     border: 1px solid #c3c3c3;

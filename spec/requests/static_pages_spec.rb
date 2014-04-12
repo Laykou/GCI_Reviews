@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'StaticPages' do
+describe 'Static Pages' do
   subject { page }
 
   shared_examples_for 'all static pages' do
@@ -28,24 +28,6 @@ describe 'StaticPages' do
 
     let(:heading) { 'Contact' }
     let(:page_title) { 'Contact | Global Clinic Index' }
-
-    it_should_behave_like 'all static pages'
-  end
-
-  describe 'Sign in page' do
-    before { visit sign_in_path }
-
-    let(:heading) { 'Sign in' }
-    let(:page_title) { 'Sign in | Global Clinic Index' }
-
-    it_should_behave_like 'all static pages'
-  end
-
-  describe 'Sign up page' do
-    before { visit sign_up_path }
-
-    let(:heading) { 'Sign up' }
-    let(:page_title) { 'Sign up | Global Clinic Index' }
 
     it_should_behave_like 'all static pages'
   end

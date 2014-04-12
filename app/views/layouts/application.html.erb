@@ -63,6 +63,10 @@
   </div>
 
   <div class="container">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
     <%= yield %>
 
     <hr>
@@ -70,6 +74,7 @@
     <footer>
       <p>&copy; MedBeaver.com 2014</p>
     </footer>
+    <%= debug(params) if Rails.env.development? %>
   </div>
 
 </body>

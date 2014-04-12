@@ -62,6 +62,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
   gem 'libnotify', '0.8.0'
+  gem 'factory_girl_rails'
 end
 
 group :production do
@@ -69,3 +70,4 @@ group :production do
 end
 
 gem "rails_admin"
+gem 'bootstrap_form'
