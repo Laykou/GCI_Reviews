@@ -23,8 +23,8 @@ class StaticPagesController < ApplicationController
       if @user.save
 
         format.html {
-          flash[:success] = 'Your account was successfully created.'
-          redirect_to account_path
+          flash[:success] = 'Your account was successfully created. You can now sign in'
+          redirect_to sign_in_path
         }
         format.json { render action: 'show', status: :created, location: @user }
       else

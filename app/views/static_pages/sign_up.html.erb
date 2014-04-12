@@ -6,7 +6,7 @@
     <%= bootstrap_form_for @user, :url => sign_up_create_path, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f| %>
         <%= f.text_field :firstname, label: "First name" %>
         <%= f.text_field :lastname, label: "Last name" %>
-        <%= f.email_field :firstname, label: "E-mail" %>
+        <%= f.email_field :email, label: "E-mail" %>
         <%= f.password_field :password, label: "Password" %>
         <%= f.password_field :password_confirmation, label: "Confirmation" %>
         <%= f.form_group do %>
