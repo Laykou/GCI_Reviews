@@ -1,6 +1,6 @@
 module ApplicationHelper
   def nav_links
-    items = {"/" => "Home", "/about" => "About", "/contact" => "Contact"}
+    items = {root_path => "Home", about_path => "About", contact_path => "Contact"}
     content_tag :ul, :class => "nav navbar-nav" do
       items.collect { |link, title| concat nav_item(link, title) }
     end

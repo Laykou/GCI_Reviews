@@ -1,20 +1,39 @@
 require 'spec_helper'
 
-describe "StaticPages" do
-  describe "About" do
-    it "should have the heading 'About'" do
-      visit '/about'
-      expect(page).to have_content('About')
-    end
+describe 'StaticPages' do
+  subject { page }
 
-    it "should have the base title" do
-      visit '/'
-      expect(page).to have_title('Global Clinic Index')
-    end
+  describe 'Home page' do
+    before { visit root_path }
 
-    it "should have a custom page title 'About'" do
-      visit '/about'
-      expect(page).to have_title('About | Global Clinic Index')
-    end
+    it { should have_title('Global Clinic Index') }
+  end
+
+  describe 'About page' do
+    before { visit about_path }
+
+    it { should have_content('About') }
+    it { should have_title('About | Global Clinic Index') }
+  end
+
+  describe 'Contact page' do
+    before { visit contact_path }
+
+    it { should have_content('Contact') }
+    it { should have_title('Contact | Global Clinic Index') }
+  end
+
+  describe 'Sign in page' do
+    before { visit sign_in_path }
+
+    it { should have_content('Sign in') }
+    it { should have_title('Sign in | Global Clinic Index') }
+  end
+
+  describe 'Sign up page' do
+    before { visit sign_up_path }
+
+    it { should have_content('Sign up') }
+    it { should have_title('Sign up | Global Clinic Index') }
   end
 end
