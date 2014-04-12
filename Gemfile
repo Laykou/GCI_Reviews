@@ -70,4 +70,6 @@ group :production do
 end
 
 gem "rails_admin"
+
 gem 'bootstrap_form'
+gem 'faker'

@@ -1,9 +1,6 @@
 GCIReviews::Application.routes.draw do
 
-  namespace :admin do
-    resources :users
-    resources :countries
-  end
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'static_pages#index'
 

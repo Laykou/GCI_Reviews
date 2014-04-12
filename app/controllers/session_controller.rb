@@ -1,4 +1,10 @@
 class SessionController < ApplicationController
+  before_action :signed_in_user, only: [:index]
+
+  def index
+
+  end
+
   def new
   end
 
@@ -17,5 +23,10 @@ class SessionController < ApplicationController
   def destroy
     sign_out
     redirect_to root_url
+  end
+
+  private
+  def signed_in_user
+    redirect_to sign_in_url, notice: "Please sign in." unless online?
   end
 end

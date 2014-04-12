@@ -45,4 +45,13 @@ describe "Authentication" do
       end
     end
   end
+
+  describe "not signed in" do
+    describe "visitin account page" do
+      before { visit account_path }
+
+      it { should_not have_content('Welcome') }
+      it { should have_button('Sign in') }
+    end
+  end
 end
