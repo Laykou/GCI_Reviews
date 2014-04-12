@@ -51,4 +51,19 @@ gem "twitter-bootstrap-rails"
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-rspec'
+
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'childprocess'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
+  gem 'libnotify', '0.8.0'
+end
+
+group :production do
+  gem 'rails_12factor'
 end

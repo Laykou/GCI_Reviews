@@ -1,6 +1,14 @@
 GCIReviews::Application.routes.draw do
+  get "static_pages/contact"
+  get "static_pages/about"
+  get "static_pages/help"
   resources :users
   resources :countries
+
+  root 'home_page#index'
+
+  get 'about' => 'static_pages#about'
+  get 'contact' => 'static_pages#help'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -56,6 +64,4 @@ GCIReviews::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  root 'home_page#index'
 end
