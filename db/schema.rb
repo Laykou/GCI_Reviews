@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412181253) do
+ActiveRecord::Schema.define(version: 20140412195527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20140412181253) do
 
   create_table "gci_reviews_api_reviews", force: true do |t|
     t.integer  "clinic_id"
-    t.integer  "gci_reviews_api"
+    t.integer  "gci_reviews_api_id"
     t.float    "procedure_score"
     t.float    "facilities_score"
     t.float    "communication_score"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20140412181253) do
   end
 
   create_table "gci_reviews_api_statistics", force: true do |t|
-    t.integer  "gci_reviews_api"
+    t.integer  "gci_reviews_api_id"
     t.string   "ip"
     t.string   "previous_url"
     t.string   "user_agent"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140412181253) do
 
   create_table "gci_reviews_api_types", force: true do |t|
     t.string   "label"
-    t.string   "type"
+    t.string   "show_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

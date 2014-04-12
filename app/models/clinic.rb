@@ -5,6 +5,6 @@ class Clinic < ActiveRecord::Base
   has_many :users
   has_many :gci_reviews_apis
 
-  validates :label, presence: true, length: { maximum: 200 }
-  validates :clinic_type, presence: true
+  validates :name, presence: true, length: { maximum: 200 }
+  validates_presence_of :clinic_type
 end

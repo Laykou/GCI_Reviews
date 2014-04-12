@@ -1,3 +1,6 @@
 class GciReviewsApiColorScheme < ActiveRecord::Base
-  has_many :gci_reviews_apis
+  belongs_to :gci_reviews_api
+  belongs_to :user
+
+  validates :label, presence: true
 end

@@ -266,6 +266,7 @@ DEPENDENCIES
   guard-spork
   jbuilder (~> 1.2)
   jquery-rails
+  json
   less-rails
   libnotify (= 0.8.0)
   pg

@@ -1,3 +1,5 @@
 class GciReviewsApiType < ActiveRecord::Base
-  belongs_to :gci_reviews_api
+  has_many :gci_reviews_apis
+
+  validates :label, presence: true
 end

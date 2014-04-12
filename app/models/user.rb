@@ -31,8 +31,30 @@ class User < ActiveRecord::Base
   end
 
   rails_admin do
-    configure :clinic_id do
-      :belongs_to_association
+    create do
+      field :firstname
+      field :lastname
+      field :email
+      field :password
+      field :password_confirmation
+      field :clinic_id
+    end
+
+    edit do
+      field :firstname
+      field :lastname
+      field :email
+      field :password
+      field :password_confirmation
+      field :clinic_id
+    end
+
+    list do
+      field :firstname
+      field :lastname
+      field :email
+      field :clinic_id
+      field :created_at
     end
   end
 end
