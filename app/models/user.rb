@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
+  has_secure_password
+
   before_save { self.email = email.downcase }
-  
+
   has_many :clinics
 
   validates :firstname, presence: true, length: {maximum: 30}
