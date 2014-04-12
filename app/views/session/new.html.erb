@@ -1,0 +1,9 @@
+<% provide(:title, "Sign in") %>
+<h1>Sign in</h1>
+<%= bootstrap_form_for :session, url: sign_in_create_path, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f| %>
+    <%= f.text_field :email, label: "E-mail" %>
+    <%= f.password_field :password %>
+    <%= f.form_group do %>
+        <%= f.primary "Sign in", class: "btn-lg" %>
+    <% end %>
+<% end %>

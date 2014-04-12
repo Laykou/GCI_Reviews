@@ -8,10 +8,6 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
-  def sign_in
-
-  end
-
   def sign_up
     @user = User.new
   end
@@ -23,8 +19,9 @@ class StaticPagesController < ApplicationController
       if @user.save
 
         format.html {
-          flash[:success] = 'Your account was successfully created. You can now sign in'
-          redirect_to sign_in_path
+          sign_in @user
+          flash[:success] = 'Welcome to the Global Clinic Index!'
+          redirect_to account_url
         }
         format.json { render action: 'show', status: :created, location: @user }
       else

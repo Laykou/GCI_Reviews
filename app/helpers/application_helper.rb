@@ -23,9 +23,4 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
-
-  # Return true if a user is looged in
-  def online?
-    false
-  end
 end
