@@ -1,0 +1,33 @@
+<div class="gci-reviews-api-full-box-reviews-all-reviews">
+  <div data-template class="gci-reviews-api-full-box-reviews-all-item">
+    <div class="gci-reviews-api-full-box-reviews-all-item-details">
+      <div class="gci-reviews-api-full-box-reviews-all-item-details-name">
+        {{name}}
+      </div>
+      <div class="gci-reviews-api-full-box-reviews-all-item-details-country">
+        {{city}}, {{country.label}}
+      </div>
+      <div class="gci-reviews-api-full-box-reviews-all-item-details-date">
+        {{created_at | date 'MMMM D, YYYY'}}
+      </div>
+      <div class="gci-reviews-api-full-box-reviews-all-item-details-rating">
+        <span class="gci-reviews-rating-medium">
+          <span style="width: {{overall_satisfaction_score_width}}px;">
+
+          </span>
+        </span>
+        <b>{{overall_satisfaction_score}}</b>
+      </div>
+      <div class="gci-reviews-api-full-box-reviews-all-item-details-final-rating">
+        <b>Final rating:</b> I recommend this facility.
+      </div>
+    </div>
+    <div class="gci-reviews-api-full-box-reviews-all-item-text">
+      <div class="gci-reviews-api-full-box-reviews-all-item-text-normal">{{normal_text}}</div>
+
+      <div class="gci-reviews-api-full-box-reviews-all-item-text-positive">{{positive_text}}</div>
+
+      <div class="gci-reviews-api-full-box-reviews-all-item-text-negative">{{negative_text}}</div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,14 @@
 <h1>Editing GCI Reviews Box</h1>
 
-<%= render 'form', submit_label: 'Update GCI Reviews box' %>
-
-<h2>Include this code in your web-site</h2>
-<textarea class="form-control">
-  <script type="text/javascript" language="javascript" src="<%= gci_reviews_url(@account_gci_reviews_api.api_code, format: :js) %>"></script>
-</textarea>
+<%= render 'form', submit_label: 'Update GCI Reviews full_box', link: account_gci_reviews_api_path(@account_gci_reviews_api) %>
 
 <%= link_to 'Show', account_gci_reviews_api_path(@account_gci_reviews_api), class: 'btn btn-primary' %>
 <%= link_to 'Back', account_gci_reviews_apis_path, class: 'btn btn-default' %>
+
+<hr>
+
+<h2>Include this code in your web-site</h2>
+<textarea class="form-control" rows="5">
+  <div class="gci-reviews-box"></div>
+  <script type="text/javascript" language="javascript" src="<%= gci_reviews_url(@account_gci_reviews_api.api_code, format: :js) %>"></script>
+</textarea>

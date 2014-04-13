@@ -1,1 +1,92 @@
-$("#new_grouping").html("cool");
+// Only do anything if jQuery isn't defined
+if (typeof jQuery == 'undefined')
+{
+    if (typeof $ == 'function')
+    {
+        // warning, global var
+        thisPageUsingOtherJSLibrary = true;
+    }
+
+    function getScript(url, success)
+    {
+        var script = document.createElement('script');
+        script.src = url;
+
+        var head = document.getElementsByTagName('head')[0],
+                done = false;
+
+        // Attach handlers for all browsers
+        script.onload = script.onreadystatechange = function ()
+        {
+
+            if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete'))
+            {
+                done = true;
+                success();
+                script.onload = script.onreadystatechange = null;
+                head.removeChild(script);
+            }
+            ;
+        };
+
+        head.appendChild(script);
+    };
+
+    getScript('http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js', function ()
+    {
+        if (typeof jQuery == 'undefined')
+        {
+            alert('We are sorry, but we could not load main jQuery library to show you reviews. This should not happen. Please contact web administrator.');
+        }
+        else
+        {
+            if (thisPageUsingOtherJSLibrary)
+            {
+                gciReviews_showReviewsBox();
+            }
+            else
+            {
+                gciReviews_showReviewsBox();
+            }
+        }
+    });
+}
+else
+{
+    gciReviews_showReviewsBox();
+};
+
+/**
+ * Show reviews full_box - load from GCI page HTML code. All JS should already be loaded
+ */
+function gciReviews_showReviewsBox()
+{
+    var $ = jQuery;
+    // Load css for styling
+    $('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', '<%= gci_reviews_url(api: @gci_reviews_api.api_code, format: :css) %>'));
+    $.get('<%= gci_reviews_box_url(api: @gci_reviews_api.api_code) %>', function (data)
+    {
+        $(".gci-reviews-box").html(data);
+    });
+}
+
+// Fill Reviews content box with reviews data
+function gciReviews_loadReviews()
+{
+    var $ = jQuery;
+    var reviews_template = $("<%= escape_javascript render 'review_tempo' %>");
+    var reviews_tempo = Tempo.prepare(reviews_template);
+    var reviews_container = $(".gci-reviews-api-full-box-reviews-all");
+
+    $.getJSON('<%= gci_reviews_list_url(api: @gci_reviews_api.api_code) %>', function (data)
+    {
+        reviews_tempo.into(reviews_container).render(data);
+
+        // Remove empty texts
+        $('.gci-reviews-api-full-box-reviews-all-item-text-normal:empty').remove();
+        $('.gci-reviews-api-full-box-reviews-all-item-text-positive:empty').remove();
+        $('.gci-reviews-api-full-box-reviews-all-item-text-negative:empty').remove();
+    });
+}
+
+<%= render 'tempo' %>

@@ -1,4 +1,5 @@
-class Account::GciReviewsApisController < ApplicationController
+class Account::GciReviewsApisController < SessionController
+  before_action :signed_in_user
   before_action :set_gci_reviews_api, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -21,7 +22,7 @@ class Account::GciReviewsApisController < ApplicationController
     respond_to do |format|
       if @account_gci_reviews_api.save
         format.html {
-          flash[:success] = 'GCI Reviews box was successfully created.'
+          flash[:success] = 'GCI Reviews full_box was successfully created.'
           redirect_to account_gci_reviews_apis_path
         }
         format.json { render action: 'show', status: :created, location: @account_gci_reviews_api }
@@ -36,7 +37,7 @@ class Account::GciReviewsApisController < ApplicationController
     respond_to do |format|
       if @account_gci_reviews_api.update(gci_reviews_api_params)
         format.html {
-          flash[:success] = 'GCI Reviews box was successfully updated.'
+          flash[:success] = 'GCI Reviews full_box was successfully updated.'
           redirect_to account_gci_reviews_apis_path
         }
         format.json { head :no_content }
