@@ -1,3 +1,7 @@
+// Current shown page
+var gciReviews_page = 1;
+var gci_max_pages = 1; // Will be change by each ajax list request for revies
+
 // Only do anything if jQuery isn't defined
 if (typeof jQuery == 'undefined')
 {
@@ -71,22 +75,55 @@ function gciReviews_showReviewsBox()
 }
 
 // Fill Reviews content box with reviews data
-function gciReviews_loadReviews()
+function gciReviews_loadReviews(page)
 {
     var $ = jQuery;
     var reviews_template = $("<%= escape_javascript render 'review_tempo' %>");
     var reviews_tempo = Tempo.prepare(reviews_template);
-    var reviews_container = $(".gci-reviews-api-full-box-reviews-all");
+    var reviews_container = $('<div class="gci-reviews-api-full-box-reviews-all">');
+    var reviews_box = $(".gci-reviews-api-full-box-reviews");
 
-    $.getJSON('<%= gci_reviews_list_url(api: @gci_reviews_api.api_code) %>', function (data)
+    navigation = $('<div class="gci-reviews-api-full-box-reviews-navigation">');
+
+    next_page = $('<a href="#" class="gci-reviews-api-full-box-reviews-navigation-next">').html('Next page').click(function (e)
     {
-        reviews_tempo.into(reviews_container).render(data);
-
-        // Remove empty texts
-        $('.gci-reviews-api-full-box-reviews-all-item-text-normal:empty').remove();
-        $('.gci-reviews-api-full-box-reviews-all-item-text-positive:empty').remove();
-        $('.gci-reviews-api-full-box-reviews-all-item-text-negative:empty').remove();
+        e.preventDefault();
+        if ((gciReviews_page + 1) <= gci_max_pages)
+        {
+            ++gciReviews_page
+            gciReviews_loadReviews();
+        }
     });
+
+    previous_page = $('<a href="#" class="gci-reviews-api-full-box-reviews-navigation-previous">').html('Previous page').click(function (e)
+    {
+        e.preventDefault();
+        if ((gciReviews_page - 1) >= 1)
+        {
+            --gciReviews_page
+            gciReviews_loadReviews();
+        }
+    });
+
+    $.getJSON('<%= gci_reviews_list_url(api: @gci_reviews_api.api_code) %>?page=' + gciReviews_page, function (data)
+            {
+                gci_max_pages = data.count
+
+                reviews_tempo.into(reviews_container).render(data.list);
+
+                // Remove empty texts
+                $('.gci-reviews-api-full-box-reviews-all-item-text-normal:empty').remove();
+                $('.gci-reviews-api-full-box-reviews-all-item-text-positive:empty').remove();
+                $('.gci-reviews-api-full-box-reviews-all-item-text-negative:empty').remove();
+
+                // Update whole reviews box with new content
+                showing_info = $('<span class="gci-reviews-api-full-box-reviews-navigation-showing">').html('Showing ' + data.showing_from + ' - ' + data.showing_to);
+                navigation_links = $('<div class="gci-reviews-api-full-box-reviews-navigation-links">').append(previous_page).append(showing_info).append(next_page);
+                navigation.append(navigation_links);
+                
+                reviews_box.html(reviews_container).prepend(navigation).append(navigation.copy);
+            }
+    );
 }
 
 <%= render 'tempo' %>

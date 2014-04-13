@@ -8,7 +8,9 @@
 }
 
 .gci-reviews-api-full-box-details {
+    position: relative;
     margin-bottom: 10px;
+    width: 100%;
     display: table;
 }
 
@@ -84,6 +86,53 @@
     padding-left: 20px;
 }
 
+/*--------------------WRITE REVIEW--------------------*/
+.gci-reviews-api-full-box-details-reviews-write-review {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    border: solid 1px #da7c0c;
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#feba02), to(#f47a20));
+    background: -moz-linear-gradient(top, #feba02, #f47a20);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feba02', endColorstr='#f47a20');
+
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.gci-reviews-api-full-box-details-reviews-write-review:hover {
+    text-decoration: underline;
+    background: #f47c20;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+    background: -moz-linear-gradient(top, #f88e11, #f06015);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+    color: #FFFFFF;
+}
+
+/*-------------------NEW REVIEW FORM----------------*/
+.gci-reviews-api-full-box-details-reviews-form {
+    display: none;
+    padding: 20px;
+    border: 1px solid #206083;
+    margin: 10px 25px;
+}
+
 /*--------------------REVIEWS-----------------------*/
 .gci-reviews-api-full-box-reviews {
 }
@@ -144,6 +193,32 @@
 }
 
 .gci-reviews-api-full-box-reviews-all-item-text-negative {
+}
+
+/*-------------------------- REVIEWS NAVIGATION--------------------------*/
+.gci-reviews-api-full-box-reviews-navigation {
+    padding: 2px 10px;
+    background-color: #F0F0F0;
+    clear: both;
+    height: 24px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.gci-reviews-api-full-box-reviews-navigation-links {
+    float: right
+}
+
+.gci-reviews-api-full-box-reviews-navigation-next {
+    padding: 0 10px;
+}
+
+.gci-reviews-api-full-box-reviews-navigation-previous {
+    padding: 0 10px;
+}
+
+.gci-reviews-api-full-box-reviews-navigation-showing {
 }
 
 /**

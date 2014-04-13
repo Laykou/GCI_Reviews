@@ -30,7 +30,18 @@ class GciReviewsController < ApplicationController
   def list
     respond_to do |format|
       format.json {
-        render json: @gci_reviews_api.gci_reviews_api_reviews.limit(10).to_json(include: :country)
+        page         = params[:page] || 1
+        sort         = params[:sort] || 'created_at DESC'
+        max_per_page = @gci_reviews_api.reviews_per_page
+        total_pages  = (@gci_reviews_api.gci_reviews_api_reviews.count / max_per_page).ceil
+        show_from    = (page.to_i - 1)*max_per_page;
+        show_to = page.to_i*max_per_page;
+
+        list_of_reviews = @gci_reviews_api.gci_reviews_api_reviews.where(approved: true).order(sort).offset(show_from).limit(max_per_page).collect do |item|
+          item.as_json(include: :country)
+        end
+
+        render json: { list: list_of_reviews, count: total_pages, page: page, showing_from: show_from + 1, showing_to: show_to }
       }
     end
   end
@@ -53,3 +64,4 @@ class GciReviewsController < ApplicationController
     end if false
   end
 end
+1
