@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-  before_action :signed_in_user, only: [:index]
+  before_action :signed_in_user, except: [:new, :create]
 
   def index
     @clinic = current_user.clinic

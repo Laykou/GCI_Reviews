@@ -1,0 +1,81 @@
+<div class="gci-reviews-api-full-box">
+  <h1>Patient reviews</h1>
+
+  <div class="gci-reviews-api-full-box-details">
+    <div class="gci-reviews-api-full-box-gcr-box">
+      <div class="gci-reviews-api-full-box-gcr-box-title">
+        <div class="gci-reviews-api-full-box-gcr-box-title-gcr">
+          GCR<sup>TM</sup>
+        </div>
+        <div class="gci-reviews-api-full-box-gcr-box-title-global-clinic-rating">
+          Global clinic rating
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-gcr-box-content">
+        <div class="gci-reviews-api-full-box-gcr-box-content-score">
+          <%= @clinic.gci_overall_satisfaction_score_average %>
+        </div>
+        <div class="gci-reviews-api-full-box-gcr-box-content-text">
+          Medical Tours Company clinic rating
+        </div>
+      </div>
+    </div>
+
+    <div class="gci-reviews-api-full-box-details-reviews-details">
+      <h2>Reviews details:</h2>
+
+      <div class="gci-reviews-api-full-box-details-reviews-details-table">
+        <div class="gci-reviews-api-full-box-details-reviews-details-row">
+          <div class="gci-reviews-api-full-box-details-reviews-details-label">
+            Procedure: <b><%= @clinic.gci_procedure_score_average %></b>
+          </div>
+          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+            <%= render 'stars', get: @clinic.gci_procedure_score_average, base: 5 %>
+          </div>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-details-row">
+          <div class="gci-reviews-api-full-box-details-reviews-details-label">
+            Facilities: <b><%= @clinic.gci_facilities_score_average %></b>
+          </div>
+          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+            <%= render 'stars', get: @clinic.gci_facilities_score_average, base: 5 %>
+          </div>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-details-row">
+          <div class="gci-reviews-api-full-box-details-reviews-details-label">
+            Communication: <b><%= @clinic.gci_communication_score_average %></b>
+          </div>
+          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+            <%= render 'stars', get: @clinic.gci_communication_score_average, base: 5 %>
+          </div>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-details-row">
+          <div class="gci-reviews-api-full-box-details-reviews-details-label">
+            <b><%= @clinic.gci_recommend_percent %>%</b> patients recommend
+          </div>
+          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+            <%= render 'stars', get: @clinic.gci_recommend_percent, base: 100 %>
+          </div>
+        </div>
+      </div>
+
+      <div class="gci-reviews-api-full-box-details-reviews-details-reviews-count">
+        Based on <%= pluralize @clinic.gci_count_reviews, 'review' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="gci-reviews-api-full-box-reviews">
+    <div class="gci-reviews-api-full-box-reviews-all">
+
+    </div>
+  </div>
+</div>
+
+<script>
+    jQuery(function ()
+    {
+        // Intialize with data after loading box
+        gciReviews_loadReviews();
+    });
+</script>

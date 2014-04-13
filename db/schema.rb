@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412195527) do
+ActiveRecord::Schema.define(version: 20140413093457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 20140412195527) do
     t.integer  "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "gci_procedure_score_average"
+    t.float    "gci_facilities_score_average"
+    t.float    "gci_communication_score_average"
+    t.float    "gci_overall_satisfaction_score_average"
+    t.float    "gci_recommend_percent"
+    t.integer  "gci_count_reviews"
   end
 
   create_table "countries", force: true do |t|
