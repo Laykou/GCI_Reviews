@@ -23,3 +23,10 @@ gci_reviews_api_types = { full: 'Full reviews', mini: 'Rating only' }
 gci_reviews_api_types.each do |key, value|
   GciReviewsApiType.where(label: value, show_type: key.to_s).first_or_create
 end
+
+
+if GciReviewsApiReview.count < 200
+  200.times do |i|
+    GciReviewsApiReview.create(clinic_id: 1, gci_reviews_api_id: 1, procedure_score: rand(1..5), facilities_score: rand(1..5), communication_score: rand(1..5), overall_satisfaction_score: rand(1..5), positive_text: Faker::Lorem.paragraph, negative_text: Faker::Lorem.paragraph, normal_text: Faker::Lorem.paragraph, name: Faker::Name.first_name, approved: true, city: Faker::Address.city, country_id: rand(1..200))
+  end
+end

@@ -62,6 +62,6 @@ class Account::GciReviewsApisController < SessionController
   end
 
   def gci_reviews_api_params
-    params.require(:gci_reviews_api).permit(:clinic_id, :web_page, :gci_reviews_api_type_id, :gci_reviews_api_color_scheme_id, :reviews_per_age)
+    params.require(:gci_reviews_api).permit(:clinic_id, :web_page, :gci_reviews_api_type_id, :gci_reviews_api_color_scheme_id, :reviews_per_page)
   end
 end

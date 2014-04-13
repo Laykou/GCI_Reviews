@@ -63,6 +63,15 @@
         Based on <%= pluralize @clinic.gci_count_reviews, 'review' %>
       </div>
     </div>
+
+    <a class="gci-reviews-api-full-box-details-reviews-write-review">Write review</a>
+  </div>
+
+  <div class="gci-reviews-api-full-box-details-reviews-form">
+    <form>
+      <input type="text">
+      <input type="submit">
+    </form>
   </div>
 
   <div class="gci-reviews-api-full-box-reviews">
@@ -75,6 +84,12 @@
 <script>
     jQuery(function ()
     {
+        jQuery(".gci-reviews-api-full-box-details-reviews-write-review").click(function (e)
+        {
+            e.preventDefault();
+            $(".gci-reviews-api-full-box-details-reviews-form").slideToggle();
+        });
+
         // Intialize with data after loading box
         gciReviews_loadReviews();
     });
