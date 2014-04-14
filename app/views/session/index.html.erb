@@ -5,7 +5,7 @@
     <p class="lead">You have assigned clinic: <b><%= @clinic.name %></b>.</p>
 
     <% if @clinic.gci_reviews_apis.any? %>
-        <p>Congratulation. You have <b><%= pluralize @clinic.gci_reviews_apis.count, 'gci reviews api' %></b> assigned
+        <p>Congratulation. You have <b><%= pluralize @clinic.gci_reviews_apis.count, 'gci reviews box' %></b> assigned
           to your account. <%= link_to "Go to the Reviews API section", account_gci_reviews_apis_path %> to manage all
           reviews. </p>
     <% else %>

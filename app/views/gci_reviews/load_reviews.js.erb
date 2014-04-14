@@ -1,6 +1,8 @@
 // Current shown page
 var gciReviews_page = 1;
+var gciReviews_sort = 1;
 var gci_max_pages = 1; // Will be change by each ajax list request for revies
+var thisPageUsingOtherJSLibrary = false;
 
 // Only do anything if jQuery isn't defined
 if (typeof jQuery == 'undefined')
@@ -75,7 +77,7 @@ function gciReviews_showReviewsBox()
 }
 
 // Fill Reviews content box with reviews data
-function gciReviews_loadReviews(page)
+function gciReviews_loadReviews()
 {
     var $ = jQuery;
     var reviews_template = $("<%= escape_javascript render 'review_tempo' %>");
@@ -105,7 +107,20 @@ function gciReviews_loadReviews(page)
         }
     });
 
-    $.getJSON('<%= gci_reviews_list_url(api: @gci_reviews_api.api_code) %>?page=' + gciReviews_page, function (data)
+    sortSelect = $('<select>');
+    sortSelect.change(function ()
+    {
+        gciReviews_sort = $(this).val();
+        gciReviews_loadReviews();
+    });
+    sortSelect.append($('<option value="1">').html('Newest first'));
+    sortSelect.append($('<option value="2">').html('Oldest first'));
+    sortSelect.append($('<option value="3">').html('Most positive first'));
+    sortSelect.append($('<option value="4">').html('Most negative first'));
+
+    sort_box = $('<span  class="gci-reviews-api-full-box-reviews-navigation-sort">').append('Sort: ').append(sortSelect);
+
+    $.getJSON('<%= gci_reviews_list_url(api: @gci_reviews_api.api_code) %>?page=' + gciReviews_page + '&sort=' + gciReviews_sort, function (data)
             {
                 gci_max_pages = data.count
 
@@ -119,11 +134,94 @@ function gciReviews_loadReviews(page)
                 // Update whole reviews box with new content
                 showing_info = $('<span class="gci-reviews-api-full-box-reviews-navigation-showing">').html('Showing ' + data.showing_from + ' - ' + data.showing_to);
                 navigation_links = $('<div class="gci-reviews-api-full-box-reviews-navigation-links">').append(previous_page).append(showing_info).append(next_page);
-                navigation.append(navigation_links);
-                
+                navigation.append(sort_box).append(navigation_links);
+
+                sortSelect.val(gciReviews_sort); // Make sort select to have selected value
+
                 reviews_box.html(reviews_container).prepend(navigation).append(navigation.copy);
             }
     );
+}
+
+
+function gciReviews_formStars()
+{
+    $(".gci-reviews-api-full-box-details-reviews-form-score-stars img").hover(function ()
+    {
+        $(this).prevAll().attr('src', '<%= image_url 'star_on_medium.png' %>');
+        $(this).attr('src', '<%= image_url 'star_on_medium.png' %>');
+        $(this).nextAll().attr('src', '<%= image_url 'star_off_medium.png' %>');
+
+    }, function ()
+    {
+        var score = $(this).parent().find('input').val();
+
+        if (score == -1 || score == 0)
+            $(this).parent().find('img').attr('src', '<%= image_url 'star_off_medium.png' %>');
+        else
+        {
+            score++;
+            $(this).parent().find('img:nth-child(' + score + ')').prevAll().attr('src', '<%= image_url 'star_on_medium.png' %>');
+            $(this).parent().find('img:nth-child(' + score + ')').nextAll().attr('src', '<%= image_url 'star_off_medium.png' %>');
+            $(this).parent().find('img:nth-child(' + score + ')').attr('src', '<%= image_url 'star_on_medium.png' %>');
+        }
+    });
+
+    $(".gci-reviews-api-full-box-details-reviews-form-score-stars img").click(function ()
+    {
+        var input = $(this).parent().find('input');
+        var score = $(this).parent().find('img').index(this) + 1;
+        input.val(score);
+    });
+}
+
+function gciReviews_formSubmit()
+{
+    var reviewsForm = $(".gci-reviews-api-full-box-details-reviews-form");
+
+    $("#gci-reviews-form").submit(function (e)
+    {
+        e.preventDefault();
+
+        // Disable form (prevent double submission)
+        $("#gci-reviews-form :input").attr('readonly', true);
+
+        var formData = $(this).serialize();
+        $.post('<%= gci_reviews_new_url(api: @gci_reviews_api.api_code) %>', formData, function (data)
+                {
+                    // Enable form
+                    $("#gci-reviews-form :input").removeAttr('readonly');
+
+                    if (data.status == 'ok')
+                    {
+                        reviewsForm.slideUp();
+
+                        // Clean form
+                        $('#gci-reviews-form :input').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+
+                        // Show message
+                        $(".gci-reviews-api-full-box-details-reviews-added ").slideDown(function ()
+                        {
+                            // Hide after 5 seconds
+                            setTimeout(function ()
+                            {
+                                $(".gci-reviews-api-full-box-details-reviews-added ").slideUp();
+                            }, 5000);
+                        });
+
+                        // Scroll to message
+                        gciReviews_scrollTo(".gci-reviews-api-full-box-details-reviews-added");
+                    }
+                }
+        );
+    });
+}
+
+function gciReviews_scrollTo(element)
+{
+    $('html, body').animate({
+        scrollTop: $(element).offset().top - 70
+    }, 700);
 }
 
 <%= render 'tempo' %>

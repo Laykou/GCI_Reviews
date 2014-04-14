@@ -22,6 +22,7 @@ GCIReviews::Application.routes.draw do
   get 'reviews/:api' => 'gci_reviews#load', :defaults => { :format => :js }, as: 'gci_reviews'
   get 'reviews/:api/box' => 'gci_reviews#box', :defaults => { :format => :html }, as: 'gci_reviews_box'
   get 'reviews/:api/list' => 'gci_reviews#list', :defaults => { :format => :json }, as: 'gci_reviews_list'
+  post 'reviews/:api/new' => 'gci_reviews#new', :defaults => { :format => :json }, as: 'gci_reviews_new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

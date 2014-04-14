@@ -1,84 +1,217 @@
 <div class="gci-reviews-api-full-box">
-  <h1>Patient reviews</h1>
+<h1>Patient reviews</h1>
 
-  <div class="gci-reviews-api-full-box-details">
-    <div class="gci-reviews-api-full-box-gcr-box">
-      <div class="gci-reviews-api-full-box-gcr-box-title">
-        <div class="gci-reviews-api-full-box-gcr-box-title-gcr">
-          GCR<sup>TM</sup>
+<div class="gci-reviews-api-full-box-details">
+  <div class="gci-reviews-api-full-box-gcr-box">
+    <div class="gci-reviews-api-full-box-gcr-box-title">
+      <div class="gci-reviews-api-full-box-gcr-box-title-gcr">
+        GCR<sup>TM</sup>
+      </div>
+      <div class="gci-reviews-api-full-box-gcr-box-title-global-clinic-rating">
+        Global clinic rating
+      </div>
+    </div>
+    <div class="gci-reviews-api-full-box-gcr-box-content">
+      <div class="gci-reviews-api-full-box-gcr-box-content-score">
+        <%= @clinic.gci_overall_satisfaction_score_average %>
+      </div>
+      <div class="gci-reviews-api-full-box-gcr-box-content-text">
+        Medical Tours Company clinic rating
+      </div>
+    </div>
+  </div>
+
+  <div class="gci-reviews-api-full-box-details-reviews-details">
+    <h2>Reviews details:</h2>
+
+    <div class="gci-reviews-api-full-box-details-reviews-details-table">
+      <div class="gci-reviews-api-full-box-details-reviews-details-row">
+        <div class="gci-reviews-api-full-box-details-reviews-details-label">
+          Procedure: <b><%= @clinic.gci_procedure_score_average %></b>
         </div>
-        <div class="gci-reviews-api-full-box-gcr-box-title-global-clinic-rating">
-          Global clinic rating
+        <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+          <%= render 'stars', get: @clinic.gci_procedure_score_average, base: 5 %>
         </div>
       </div>
-      <div class="gci-reviews-api-full-box-gcr-box-content">
-        <div class="gci-reviews-api-full-box-gcr-box-content-score">
-          <%= @clinic.gci_overall_satisfaction_score_average %>
+      <div class="gci-reviews-api-full-box-details-reviews-details-row">
+        <div class="gci-reviews-api-full-box-details-reviews-details-label">
+          Facilities: <b><%= @clinic.gci_facilities_score_average %></b>
         </div>
-        <div class="gci-reviews-api-full-box-gcr-box-content-text">
-          Medical Tours Company clinic rating
+        <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+          <%= render 'stars', get: @clinic.gci_facilities_score_average, base: 5 %>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-details-row">
+        <div class="gci-reviews-api-full-box-details-reviews-details-label">
+          Communication: <b><%= @clinic.gci_communication_score_average %></b>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+          <%= render 'stars', get: @clinic.gci_communication_score_average, base: 5 %>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-details-row">
+        <div class="gci-reviews-api-full-box-details-reviews-details-label">
+          <b><%= @clinic.gci_recommend_percent %>%</b> patients recommend
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-details-stars">
+          <%= render 'stars', get: @clinic.gci_recommend_percent, base: 100 %>
         </div>
       </div>
     </div>
 
-    <div class="gci-reviews-api-full-box-details-reviews-details">
-      <h2>Reviews details:</h2>
+    <div class="gci-reviews-api-full-box-details-reviews-details-reviews-count">
+      Based on <%= pluralize @clinic.gci_count_reviews, 'review' %>
+    </div>
+  </div>
 
-      <div class="gci-reviews-api-full-box-details-reviews-details-table">
-        <div class="gci-reviews-api-full-box-details-reviews-details-row">
-          <div class="gci-reviews-api-full-box-details-reviews-details-label">
-            Procedure: <b><%= @clinic.gci_procedure_score_average %></b>
-          </div>
-          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
-            <%= render 'stars', get: @clinic.gci_procedure_score_average, base: 5 %>
-          </div>
+  <a class="gci-reviews-api-full-box-details-reviews-write-review">Write review</a>
+</div>
+
+<div class="gci-reviews-api-full-box-details-reviews-added">
+  Thank you for your review!
+</div>
+
+<div class="gci-reviews-api-full-box-details-reviews-form">
+  <div class="gci-reviews-api-full-box-details-reviews-form-info">
+    Please take 3 minutes to enter your feedback on Dental Holiday below to help future patients in finding the most
+    suitable clinic.
+  </div>
+  <form id="gci-reviews-form">
+    <div class="gci-reviews-api-full-box-details-reviews-form-score">
+      <div class="gci-reviews-api-full-box-details-reviews-form-score-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-label">
+          Treatment quality*:
         </div>
-        <div class="gci-reviews-api-full-box-details-reviews-details-row">
-          <div class="gci-reviews-api-full-box-details-reviews-details-label">
-            Facilities: <b><%= @clinic.gci_facilities_score_average %></b>
-          </div>
-          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
-            <%= render 'stars', get: @clinic.gci_facilities_score_average, base: 5 %>
-          </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-rating">
+          <%= render 'form_stars', name: 'procedure_score' %>
         </div>
-        <div class="gci-reviews-api-full-box-details-reviews-details-row">
-          <div class="gci-reviews-api-full-box-details-reviews-details-label">
-            Communication: <b><%= @clinic.gci_communication_score_average %></b>
-          </div>
-          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
-            <%= render 'stars', get: @clinic.gci_communication_score_average, base: 5 %>
-          </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-score-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-label">
+          Facilities*:
         </div>
-        <div class="gci-reviews-api-full-box-details-reviews-details-row">
-          <div class="gci-reviews-api-full-box-details-reviews-details-label">
-            <b><%= @clinic.gci_recommend_percent %>%</b> patients recommend
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-rating">
+          <%= render 'form_stars', name: 'facilities_score' %>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-score-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-label">
+          Communication skills*:
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-rating">
+          <%= render 'form_stars', name: 'communication_skills' %>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-score-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-label">
+          How likely would you recomend this clinic to your family or friends?*:
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-rating">
+          <%= render 'form_stars', name: 'recommend_score' %>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-score-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-label">
+
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-score-rating">
+          <div style="float: left;">
+            Least likely
           </div>
-          <div class="gci-reviews-api-full-box-details-reviews-details-stars">
-            <%= render 'stars', get: @clinic.gci_recommend_percent, base: 100 %>
+          <div style="float: right;">
+            Most likely
           </div>
         </div>
       </div>
+    </div>
+    <div class="gci-reviews-api-full-box-details-reviews-form-text-rating">
+      <div class="gci-reviews-api-full-box-details-reviews-form-text-rating-info">
+        Anything you would like to add?
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-text-rating-text">
+        <div class="gci-reviews-api-full-box-details-reviews-form-text-rating-text-table">
+          <div class="gci-reviews-api-full-box-details-reviews-form-text-rating-text-cell">
+            <textarea name="positive_text" placeholder="Write your positive feedback (optional)"></textarea>
+          </div>
 
-      <div class="gci-reviews-api-full-box-details-reviews-details-reviews-count">
-        Based on <%= pluralize @clinic.gci_count_reviews, 'review' %>
+          <div class="gci-reviews-api-full-box-details-reviews-form-text-rating-text-cell">
+            <textarea name="negative_text" placeholder="Write your negative feedback (optional)"></textarea>
+          </div>
+        </div>
+
+        <textarea name="normal_text" placeholder="Write any other text (optional)"></textarea>
+      </div>
+    </div>
+    <div class="gci-reviews-api-full-box-details-reviews-form-contact">
+      <div class="gci-reviews-api-full-box-details-reviews-form-contact-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <label for="gciReviewsFirstName">
+            First name
+          </label>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <input type="text" name="name" value="" placeholder="Enter your first name" id="gciReviewsFirstName">
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-contact-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <label for="gciReviewsCity">
+            City
+          </label>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <input type="text" name="city" value="" placeholder="Enter the city where you live" id="gciReviewsCity">
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-contact-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <label for="gciReviewsCountry">
+            Country
+          </label>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <select id="gciReviewsCountry">
+            <% Country.all.each do |c| %>
+                <option value="<%= c.id.to_s %>"><%= c.label %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="gci-reviews-api-full-box-details-reviews-form-contact-row">
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <label for="gciReviewsEmail">
+            Email address
+          </label>
+        </div>
+        <div class="gci-reviews-api-full-box-details-reviews-form-contact-cell">
+          <input type="text" name="email" value="" placeholder="Enter your e-mail address" id="gciReviewsEmail">
+        </div>
       </div>
     </div>
 
-    <a class="gci-reviews-api-full-box-details-reviews-write-review">Write review</a>
-  </div>
-
-  <div class="gci-reviews-api-full-box-details-reviews-form">
-    <form>
-      <input type="text">
-      <input type="submit">
-    </form>
-  </div>
-
-  <div class="gci-reviews-api-full-box-reviews">
-    <div class="gci-reviews-api-full-box-reviews-all">
-
+    <div class="gci-reviews-api-full-box-details-reviews-form-contact-email-info">
+      Your email address will not be published, we will use it only to confirm the validity of your review to
+      prevent fradulent reviews. Thanks for sharing your feedback!
     </div>
+
+    <div class="gci-reviews-api-full-box-details-reviews-form-agree">
+      <label>
+        <input type="checkbox" name="agree" value="true">
+        By checking this box, I confirm that this is my own opinion of my treatment at the selected dental provider
+        and that I am neither affiliated with the clinic nor I have been incentivized by the clinic to complete it.
+      </label>
+    </div>
+    <div class="gci-reviews-api-full-box-details-reviews-form-send">
+      <input type="submit" value="Send your review">
+    </div>
+  </form>
+</div>
+
+<div class="gci-reviews-api-full-box-reviews">
+  <div class="gci-reviews-api-full-box-reviews-all">
+
   </div>
+</div>
 </div>
 
 <script>
@@ -87,10 +220,23 @@
         jQuery(".gci-reviews-api-full-box-details-reviews-write-review").click(function (e)
         {
             e.preventDefault();
+
+            // If was hidden as wil be visible
+            var scrollAfterShow = ($(".gci-reviews-api-full-box-details-reviews-form").css('display') == 'none');
+
             $(".gci-reviews-api-full-box-details-reviews-form").slideToggle();
+
+            if (scrollAfterShow) // If was hidden as wil be visible
+                gciReviews_scrollTo(".gci-reviews-api-full-box-details-reviews-form"); // Scroll to form
         });
 
-        // Intialize with data after loading box
+        // Initialize with data after loading box
         gciReviews_loadReviews();
+
+        // Initialize form stars (score)
+        gciReviews_formStars();
+
+        // Initialize form ajax
+        gciReviews_formSubmit();
     });
 </script>

@@ -1,6 +1,6 @@
 class GciReviewsController < ApplicationController
   before_action :must_have_api_code
-  before_action :check_valid_url, only: [:box, :list]
+  before_action :check_valid_url, only: [:box, :list, :load, :new]
 
   # Loading initial javascript, css
   def load
@@ -30,8 +30,10 @@ class GciReviewsController < ApplicationController
   def list
     respond_to do |format|
       format.json {
+        sort_hash = { '1' => 'created_at DESC', '2' => 'created_at ASC', '3' => 'overall_satisfaction_score DESC, created_at DESC', '4' => 'overall_satisfaction_score ASC, created_at DESC' }
+
         page         = params[:page] || 1
-        sort         = params[:sort] || 'created_at DESC'
+        sort         = sort_hash[params[:sort]] || sort_hash['1']
         max_per_page = @gci_reviews_api.reviews_per_page
         total_pages  = (@gci_reviews_api.gci_reviews_api_reviews.count / max_per_page).ceil
         show_from    = (page.to_i - 1)*max_per_page;
@@ -46,6 +48,16 @@ class GciReviewsController < ApplicationController
     end
   end
 
+  # Adding new review
+  def new
+    respond_to do |format|
+      format.json {
+        response = { status: 'ok' }
+        render json: response.to_json
+      }
+    end
+  end
+
   private
   def must_have_api_code
     @gci_reviews_api = GciReviewsApi.find_by(api_code: params.require(:api))
@@ -53,15 +65,18 @@ class GciReviewsController < ApplicationController
 
   # Check for correct referer - compare only domain name
   def check_valid_url
-    refererURI = URI(request.referer.to_s).host.to_s
-    allowedURI = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
+    refererURI                               = URI(request.referer.to_s).host.to_s
+    allowedURI                               = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
+
+    # Allow all url
+    headers['Access-Control-Allow-Origin']   = '*'
+    headers['Access-Control-Request-Method'] = '*'
 
     respond_to do |format|
       format.all {
-        render text: 'Access denied. Wrong referer page'.html_safe, layout: false
+        render text: 'Access denied. Check your settings.'.html_safe, layout: false
       }
-      #end if refererURI.empty? || !allowedURI.include?(refererURI)
-    end if false
+    end if refererURI.empty? || !allowedURI.include?(refererURI)
+    #end if false
   end
 end
-1
