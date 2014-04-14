@@ -8,6 +8,12 @@
         <p>Congratulation. You have <b><%= pluralize @clinic.gci_reviews_apis.count, 'gci reviews box' %></b> assigned
           to your account. <%= link_to "Go to the Reviews API section", account_gci_reviews_apis_path %> to manage all
           reviews. </p>
+        <div style="margin: 10px 0;">
+          <%= link_to 'Manage GCI Reviews Boxes', account_gci_reviews_apis_path, class: 'btn btn-primary' %>
+        </div>
+        <div>
+          <%= link_to 'Manage Color Schemes', account_gci_reviews_api_color_schemes_path, class: 'btn btn-primary' %>
+        </div>
     <% else %>
         <p>You don't have any
           <b>GCI Reviews API created</b>. <%= link_to "Create GCI Reviews API", new_account_gci_reviews_api_path %> to

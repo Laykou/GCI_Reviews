@@ -4,6 +4,7 @@ GCIReviews::Application.routes.draw do
 
   namespace :account do
     resources :gci_reviews_apis
+    resources :gci_reviews_api_color_schemes
   end
 
   root 'static_pages#index'

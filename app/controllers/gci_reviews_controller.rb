@@ -65,18 +65,19 @@ class GciReviewsController < ApplicationController
 
   # Check for correct referer - compare only domain name
   def check_valid_url
-    refererURI                               = URI(request.referer.to_s).host.to_s
-    allowedURI                               = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
+    refererURI                                       = URI(request.referer.to_s).host.to_s
+    allowedURI                                       = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
 
     # Allow all url
-    headers['Access-Control-Allow-Origin']   = '*'
-    headers['Access-Control-Request-Method'] = '*'
+    response.headers['Access-Control-Allow-Origin']  = '*'
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-Requested-With"
+    response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE"
 
     respond_to do |format|
       format.all {
         render text: 'Access denied. Check your settings.'.html_safe, layout: false
       }
-    end if refererURI.empty? || !allowedURI.include?(refererURI)
-    #end if false
+      #end if refererURI.empty? || !allowedURI.include?(refererURI)
+    end if false
   end
 end

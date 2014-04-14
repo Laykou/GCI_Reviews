@@ -1,0 +1,30 @@
+<h1>Listing account_gci_reviews_api_color_schemes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Label</th>
+      <th></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @account_gci_reviews_api_color_schemes.each do |account_gci_reviews_api_color_scheme| %>
+        <tr>
+          <td><%= account_gci_reviews_api_color_scheme.id %></td>
+          <td><%= account_gci_reviews_api_color_scheme.label %></td>
+        </tr>
+        <tr>
+          <td><%= link_to 'Show', account_gci_reviews_api_color_scheme %>
+            <%= link_to 'Edit', edit_account_gci_reviews_api_color_scheme_path(account_gci_reviews_api_color_scheme) %>
+            <%= link_to 'Destroy', account_gci_reviews_api_color_scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New color schema', new_account_gci_reviews_api_color_scheme_path, class: 'btn btn-primary' %>

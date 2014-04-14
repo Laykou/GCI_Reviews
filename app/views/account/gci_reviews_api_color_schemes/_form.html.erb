@@ -1,0 +1,18 @@
+<%= bootstrap_form_for @account_gci_reviews_api_color_scheme, url: link, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-4' do |f| %>
+    <% if @account_gci_reviews_api_color_scheme.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@account_gci_reviews_api_color_scheme.errors.count, "error") %> prohibited this
+            account_gci_reviews_api_color_scheme from being saved:</h2>
+
+          <ul>
+            <% @account_gci_reviews_api_color_scheme.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
