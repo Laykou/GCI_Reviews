@@ -1,6 +1,7 @@
 class GciReviewsController < ApplicationController
   before_action :must_have_api_code
   before_action :check_valid_url, only: [:box, :list, :load, :new]
+  skip_before_filter :verify_authenticity_token
 
   # Loading initial javascript, css
   def load
@@ -58,6 +59,14 @@ class GciReviewsController < ApplicationController
     end
   end
 
+  # Options header is sent before POST. This is needed for AJAX Review insert
+  def set_options
+    response.headers['Access-Control-Allow-Origin']  = '*'
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-Requested-With"
+    response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE"
+    render nothing: true, status: 204
+  end
+
   private
   def must_have_api_code
     @gci_reviews_api = GciReviewsApi.find_by(api_code: params.require(:api))
@@ -65,13 +74,14 @@ class GciReviewsController < ApplicationController
 
   # Check for correct referer - compare only domain name
   def check_valid_url
-    refererURI                                       = URI(request.referer.to_s).host.to_s
-    allowedURI                                       = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
+    refererURI                                  = URI(request.referer.to_s).host.to_s
+    allowedURI                                  = @gci_reviews_api.web_page.to_s.split(',').map! { |uri| uri = URI(uri).host }
 
     # Allow all url
-    response.headers['Access-Control-Allow-Origin']  = '*'
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-Requested-With"
-    response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE"
+    headers['Access-Control-Allow-Origin']      = '*'
+    headers['Access-Control-Request-Method']    = '*'
+    headers['Access-Control-Allow-Headers']     = '*'
+    headers['Access-Control-Allow-Credentials'] = "true"
 
     respond_to do |format|
       format.all {

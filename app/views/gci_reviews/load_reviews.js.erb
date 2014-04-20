@@ -187,33 +187,37 @@ function gciReviews_formSubmit()
         $("#gci-reviews-form :input").attr('readonly', true);
 
         var formData = $(this).serialize();
-        $.post('<%= gci_reviews_new_url(api: @gci_reviews_api.api_code) %>', formData, function (data)
+        $.ajax({
+            type: "POST",
+            url: '<%= gci_reviews_new_url(api: @gci_reviews_api.api_code) %>',
+            data: formData,
+            success: function (data)
+            {
+                // Enable form
+                $("#gci-reviews-form :input").removeAttr('readonly');
+
+                if (data.status == 'ok')
                 {
-                    // Enable form
-                    $("#gci-reviews-form :input").removeAttr('readonly');
+                    reviewsForm.slideUp();
 
-                    if (data.status == 'ok')
+                    // Clean form
+                    $('#gci-reviews-form :input').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+
+                    // Show message
+                    $(".gci-reviews-api-full-box-details-reviews-added ").slideDown(function ()
                     {
-                        reviewsForm.slideUp();
-
-                        // Clean form
-                        $('#gci-reviews-form :input').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
-
-                        // Show message
-                        $(".gci-reviews-api-full-box-details-reviews-added ").slideDown(function ()
+                        // Hide after 5 seconds
+                        setTimeout(function ()
                         {
-                            // Hide after 5 seconds
-                            setTimeout(function ()
-                            {
-                                $(".gci-reviews-api-full-box-details-reviews-added ").slideUp();
-                            }, 5000);
-                        });
+                            $(".gci-reviews-api-full-box-details-reviews-added ").slideUp();
+                        }, 5000);
+                    });
 
-                        // Scroll to message
-                        gciReviews_scrollTo(".gci-reviews-api-full-box-details-reviews-added");
-                    }
+                    // Scroll to message
+                    gciReviews_scrollTo(".gci-reviews-api-full-box-details-reviews-added");
                 }
-        );
+            }
+        });
     });
 }
 
